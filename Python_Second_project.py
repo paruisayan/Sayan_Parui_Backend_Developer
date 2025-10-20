@@ -91,4 +91,7 @@ else:
     c_address=input("Please enter your address:")
     data_entry_sql(c_name,c_address,cust_phone_number)
 
+
 conn_obj.close()
+def show():
+    print("Pull request testing")
