@@ -92,3 +92,6 @@ else:
     data_entry_sql(c_name,c_address,cust_phone_number)
 
 conn_obj.close()
+
+def show_me_data():
+    print("Pull request testing")
