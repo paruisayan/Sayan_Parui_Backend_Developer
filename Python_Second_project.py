@@ -1,6 +1,7 @@
 #Database connection details
 import mysql.connector
 import Scanner_OpenCV
+#Code Push to Git by Sayan Parui for Testing 
 
 conn_obj=mysql.connector.connect(
     host="localhost",
