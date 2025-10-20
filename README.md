@@ -1,2 +1,2 @@
 # Sayan_Parui_College_Project
-This is my first Git repository for backend code
+Supermarket backend code by Sayan Parui
