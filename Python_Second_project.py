@@ -93,6 +93,6 @@ else:
 
 conn_obj.close()
 
-def show_me_data():
-    print("Pull request testing")
+
+
 
