@@ -1,2 +1,3 @@
-# Sayan_Parui_College_Project
-Supermarket backend code by Sayan Parui
+# Sayan_Parui_CodeHouse
+def BrainCoding():
+    return("Welcome to my Coding World")
