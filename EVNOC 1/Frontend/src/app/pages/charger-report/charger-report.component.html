@@ -1,0 +1,18 @@
+<mat-toolbar class="toolbar">
+    <span style="font-size: 1.4vw;font-weight:600;">Charger Hits > Last 15 Days Report</span>
+    <button mat-raised-button (click)="exporter.exportTable('csv',{fileName:'chargerReport'})" style="position:relative;right:-67%;font-size:0.8vw;" color="primary">Download_Report</button>
+  </mat-toolbar>
+<section class="example-container mat-elevation-z8" tabindex="0">
+    <table mat-table matTableExporter [dataSource]='dataSource' #exporter="matTableExporter" matSort>
+      <ng-container *ngFor="let i of displayedColumns;let k=index" matColumnDef={{i}} 
+      [sticky]="k<4" >
+        <th mat-header-cell *matHeaderCellDef 
+        [ngStyle]="{'border-right':k>=3?'1px solid black':'green','text-align':'center'}">
+        {{i}}
+        </th>
+        <td mat-cell *matCellDef="let element" [ngStyle]="{'border-right':k>=3?'1px solid black':'green'}"> {{element[i] || '-'}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</section>

@@ -1,0 +1,207 @@
+.main{
+    height: 80%;
+    width:100%;
+    margin:10px 10px 10px 10px;
+    
+  }
+  .buttons{
+    height: 10%;
+    width: 100%;
+    margin-top: -1%;
+  }
+  button{
+    margin-top: 0.7%;
+    height: 70%;
+    width: 13.3%;
+    margin-left: 0.7%;
+    font: normal normal medium 15px/18px Roboto;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: inset 0px 3px 6px #00000008;
+    border: 1px solid #E9E8E8;
+    cursor: pointer;
+  }
+  .search{
+    height: 7%;
+    align-items: center;
+    margin-left: 0.5%;
+    display: flex;
+    justify-content: left;
+  }
+  .search .date{
+    height: 100%;
+    width: 65%;
+    margin-top: 0%;
+    display: flex;
+    flex-direction: row;
+  }
+  .date input{
+    width: 22%;
+    height: 75%;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    font-size: 1vw;
+    border: 1px solid #EEEEEE;
+    border-radius: 3px;
+  }
+  .date button{
+    width: 16.5%;
+    height: 90%;
+    color: white;
+    background: #1169B5 0% 0% no-repeat padding-box;
+    font-size: 1vw;
+    border: 1px solid #EEEEEE;
+    border-radius: 5px;
+    margin-top: -0.1%;
+  }
+  .search .refresh{
+    width: 35%;
+    height: 100%;
+    display: flex;
+    margin-right: 2%;
+    justify-content: right;
+  
+  }
+  .refresh input{
+    margin-top: 1.7%;
+    width: 50%;
+    height: 55%;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #EEEEEE;
+    border-radius: 3px;
+  }
+  .refresh button{
+    margin-top: 1.5%;
+    width: 39%;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #3A7DDA;
+    border-radius: 3px;
+    color:#3A7DDA;
+  }
+  .spacer {
+    flex: 1 1 auto;
+  }
+  .table{
+    height: 90%;
+    width: 98vw;
+    overflow: scroll;
+
+  }
+  table {
+    margin-left: 8px;
+    margin-top: 5px;
+    width: 96vw;
+  }
+  th{
+    font-weight: bold;
+    font-size: 1.2vw;
+  }
+  td{
+    font-size: 1vw;
+  }
+  .w-75{
+    width: 75px;
+  }
+  
+  .w-100{
+    width: 100px;
+  }
+  .w-50{
+    width: 50px;
+  }
+  .w-125{
+    width: 125px;
+  }
+  .w-150{
+    width: 150px;
+  }
+  .mat-mdc-row:hover .mat-mdc-cell {
+    background-color: rgb(211, 211, 211);
+  }
+  .mat-column-Name{
+    border-right: 1px solid rgba(0,0,0,.12);;
+  }
+  .mat-column-State{
+    border-right: 1px solid rgba(0,0,0,.12);;
+  }
+  .mat-column-City{
+    border-right: 1px solid rgba(0,0,0,.12);;
+  }
+  .mat-column-Identifier{
+    border-right: 1px solid rgba(0,0,0,.12);;
+  }
+  .mat-column-Connector_ID{
+    border-right: 1px solid rgba(0,0,0,.12);;
+  }
+  .mat-column-Model{
+    border-right: 1px solid rgba(0,0,0,.12);;
+  }
+  .mat-column-Generic_Code{
+    border-right: 1px solid rgba(0,0,0,.12);;
+  }
+  .mat-column-Generic_Description{
+    border-right: 1px solid rgba(0,0,0,.12);;
+  }
+  .mat-column-Severity{
+    border-right: 1px solid rgba(0,0,0,.12);;
+  }
+  .mat-column-Status{
+    border-right: 1px solid rgba(0,0,0,.12);;
+  }
+  .mat-column-Timestamp{
+    border-right: 1px solid rgba(0,0,0,.12);;
+  }
+  /* ::-webkit-scrollbar{
+    display: none;
+  } */
+  .load{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    height: 75%;
+    width: 100vw;
+  }
+  @property --a {
+    initial-value: 0deg;
+    inherits: false;
+    syntax: '<angle>';
+  }
+  @property --h {
+    initial-value: 0;
+    inherits: false;
+    syntax: '<number>';
+  }
+  .loader {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    font-family: monospace;
+    font-weight: bold;
+    color: black;
+    border-style: solid;
+    border-width: 1vmin;
+    font-size: 2rem;
+    --charge: hsl(var(--h, 0), 80%, 50%);
+    -o-border-image: conic-gradient(var(--charge) var(--a), transparent calc(var(--a) + 0.5deg)) 30;
+       border-image: conic-gradient(var(--charge) var(--a), transparent calc(var(--a) + 0.5deg)) 30;
+    -webkit-animation: load 2s infinite ease-in-out;
+            animation: load 2s infinite ease-in-out;
+  }
+  @-webkit-keyframes load {
+    0%, 10% {
+      --a: 0deg;
+      --h: 0;
+    }
+    100% {
+      --a: 360deg;
+      --h: 100;
+    }
+  }
+  @keyframes load {
+    0%, 10% {
+      --a: 0deg;
+      --h: 0;
+    }
+    100% {
+      --a: 360deg;
+      --h: 100;
+    }
+  }

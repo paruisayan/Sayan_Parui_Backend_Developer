@@ -1,0 +1,106 @@
+<div *ngIf="!loader" class="load">
+    <div class="loader">
+        <img src="assets/images/ez_c.png">
+      </div>
+  </div>
+  <div class="main" *ngIf="loader">
+    <div class="buttons">
+        <button                                   style="font-size:1vw;color:black;">Total:   <label style="font: normal normal bold 1vw/1.2vw Roboto;"> {{countArray[0]}}</label></button>
+        <button (click)="filterEvent('Critical')" style="font-size:1vw;color:red;">Critical:  <label style="font: normal normal bold 1vw/1.2vw Roboto;"> {{countArray[3]}}</label></button>
+        <button (click)="filterEvent('Medium')"   style="font-size:1vw;color:#F8C300;">Medium:<label style="font: normal normal bold 1vw/1.2vw Roboto;">{{countArray[1]}}</label></button>
+        <button (click)="filterEvent('High')"     style="font-size:1vw;color:orange;">High:   <label style="font: normal normal bold 1vw/1.2vw Roboto;"> {{countArray[2]}}</label></button>
+        <button (click)="filterEvent('Low')"      style="font-size:1vw;color:brown;">Low:     <label style="font: normal normal bold 1vw/1.2vw Roboto;"> {{countArray[4]}}</label></button>
+        <button (click)="filterEvent('Open')"     style="font-size:1vw;color:black;">Open:    <label style="font: normal normal bold 1vw/1.2vw Roboto;"> {{countArray[6]}}</label></button>
+        <button (click)="filterEvent('Resolved')" style="font-size:1vw;color:green;">Resolved:<label style="font: normal normal bold 1vw/1.2vw Roboto;"> {{countArray[5]}}</label></button>
+    </div>
+    <div class="search">
+        <div class="date" [formGroup]="dateRange">
+        <input placeholder="Start date" formControlName="start" matInput [matDatepicker]="picker" (dateInput)="getStartDate('input', $event)" [formControl]="dates" >
+        <mat-datepicker-toggle style="position: relative; top:-20%;margin-left: -5%;" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker         #picker></mat-datepicker>
+        </div>
+        <span class="spacer"></span>
+        <div class="refresh">
+        <input style="font-size:1vw" matInput placeholder="search" (keyup)="applyFilter($event)" #input>
+        <mat-icon matSuffix style="position: relative; top:20%;margin-left: -6%; color: blue;">search</mat-icon>
+        &nbsp;&nbsp;
+        <button style="font-size:1vw" (click)="exporter.exportTable('csv',{fileName:'alarmFault'})">Download</button>
+        </div>
+    </div>
+    <div class="table">
+        <table mat-table matTableExporter [dataSource]="dataSource" class="mat-elevation-z8 demo-table" #exporter="matTableExporter">
+            <!-- Position Column -->
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef  style="text-align: center;"> Name </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.name}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="State">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> State </th>
+              <td mat-cell *matCellDef="let element"style="text-align: center;"> {{element.state}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="City">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> City </th>
+              <td mat-cell *matCellDef="let element"style="text-align: center;"> {{element.city}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Identifier">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Identifier </th>
+              <td mat-cell *matCellDef="let element"style="text-align: center;"> {{element.identifier}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Connector_ID">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Connector ID </th>
+              <td mat-cell *matCellDef="let element"style="text-align: center;"> {{element.connectorid}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Model">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Model </th>
+              <td mat-cell *matCellDef="let element"style="text-align: center;"> {{element.model}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Generic_Code">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Generic Code</th>
+              <td mat-cell *matCellDef="let element"style="text-align: center;"> {{element.faultcode}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Generic_Description">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Generic Description </th>
+              <td mat-cell *matCellDef="let element"style="text-align: center;"> {{element.faultdescription}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Severity">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Severity </th>
+              <td mat-cell *matCellDef="let element"style="text-align: center;"> {{element.severity}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Status">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Status</th>
+              <td mat-cell *matCellDef="let element"style="text-align: center;"> {{element.faultstatus}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Timestamp">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Timestamp</th>
+              <td mat-cell *matCellDef="let element"style="text-align: center;"> {{element.timestamp}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Resolution">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Resolution Time</th>
+              <td mat-cell *matCellDef="let element"style="text-align: center;"> {{element.resolutiontime}} </td>
+            </ng-container>
+  
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true" style="background-color:lightblue"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+  
+          </table>         
+    </div>
+  </div>

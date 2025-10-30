@@ -1,0 +1,17 @@
+<mat-toolbar class="toolbar" style="background-color: white;">
+    <span style="font-size: 1.4vw;font-weight:600;">Analytics > Charging Session Trends > Daily Trend</span>
+</mat-toolbar>
+<div class="date" [formGroup]="dateRange">
+    <input placeholder="Start date" formControlName="start" [max]="today" matInput [matDatepicker]="picker" (dateInput)="getStartDate('input', $event)" [formControl]="dates" >
+    <mat-datepicker-toggle style="position: relative; top:35%;margin-left: -3%;" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    &nbsp;
+    &nbsp;
+    <button (click)="trendsCount()">Search</button>
+</div>
+<div *ngIf="!loader" class="load">
+    <div class="loader">
+        <img src="assets/images/ez_c.png">
+      </div>
+</div>
+<div echarts *ngIf="loader" [options]="eChartOption" class="chart"></div>

@@ -1,0 +1,174 @@
+<div class="main">
+    <div class="menu">
+      <div style="height: 3rem;width:23.6rem ; margin-left: 0.7rem;">
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="Search With Charging Station or Identifier" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="value">
+            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option" style="font-size: 0.7rem ;">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form> 
+      </div>
+      <span>Showing you results for</span>
+      <form [formGroup]="createAccountForm">
+      <select style="height: 2.5vw; width: 28vw;font-size: 1vw;" formControlName="_states" (change)="onChangeState($event); _getCountOfCharger($event,'state')" >
+          <option value="" selected>State: All State (India Level)</option>
+          <option value="Andhra Pradesh">Andhra Pradesh</option>
+              <!-- <option value="Arunachal Pradesh">Arunachal Pradesh</option> -->
+              <option value="Assam">Assam</option>
+              <option value="Bihar">Bihar</option>
+              <option value="Chhattisgarh">Chhattisgarh</option>
+              <option value="Goa">Goa</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Haryana">Haryana</option>
+              <option value="Himachal Pradesh">Himachal Pradesh</option>
+              <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+              <option value="Jharkhand">Jharkhand</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Kerala">Kerala</option>
+              <option value="Madhya Pradesh">Madhya Pradesh</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <!-- <option value="Meghalaya">Meghalaya</option> -->
+              <!-- <option value="Mizoram">Mizoram</option> -->
+              <!-- <option value="Nagaland">Nagaland</option> -->
+              <option value="Odisha">Odisha</option>
+              <option value="Punjab">Punjab</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Sikkim">Sikkim</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="Telangana">Telangana</option>
+              <option value="Tripura">Tripura</option>
+              <option value="Uttarakhand">Uttarakhand</option>
+              <option value="Uttar Pradesh">Uttar Pradesh</option>
+              <option value="West Bengal">West Bengal</option>
+              <option value="Pondicherry">Pondicherry</option>
+              <!-- <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option> -->
+              <!-- <option value="Chandigarh">Chandigarh</option> -->
+              <!-- <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option> -->
+              <!-- <option value="Daman and Diu">Daman and Diu</option> -->
+              <option value="Delhi">Delhi</option>
+              <!-- <option value="Lakshadweep">Lakshadweep</option> -->
+              <!-- <option value="Puducherry">Puducherry</option> -->
+      </select>
+      <select class="sel_city_pin" formControlName="cities" (change)="onChangeCity($event); _getCountOfCharger($event,'city')">
+          <option value="" selected>City:<label style="font: italic italic italic 13px/18px Roboto;letter-spacing: 0px;color: #C6BEBE;">No city selected</label></option>
+          <option *ngFor="let city1 of cityList">{{city1}}</option>
+      </select>
+      <select class="sel_city_pin" formControlName="postalcodes" (change)="onChangePin($event);_getCountOfCharger($event,'postalcode')">
+          <option value="" selected>Pincode:<label>No pin selected</label></option>
+          <option *ngFor="let postalcode1 of cityList1" >{{postalcode1}}</option>
+      </select>
+    </form>
+      <div class="update">
+        <div style="width:100%; margin-bottom: -1rem;" class="active">
+        <p style="font:normal normal bold 1.1vw/1.3vw Roboto;letter-spacing: 0px;color: #27150C;">Today's Updates</p>
+        </div>
+        <div class="in_active" style="margin-bottom: -1rem;">
+        <p class="inact" style="color: red;font: normal normal medium 1vw/1.2vw Roboto;top:24%">{{inactivelen}} chargers turned inactive today<button mat-button color="primary" (click)= "_viewDetails()">View Details</button></p>
+        <!-- <hr>
+        <p class="acti" style="color:green;font: normal normal medium 1vw/1.2vw Roboto;top:-1%">{{activelen}} chargers turned active today </p>  -->
+      </div>
+      </div>
+  
+      <div class="sessions">
+        <p>Total Completed Charging Sessions</p>
+        <div class="box">
+        <div class="completed">&nbsp;&nbsp; Completed<br><span style="font: normal normal bold 35px/40px Roboto;display: flex;align-items: center;justify-content: left;">{{completelen}}</span></div>
+        <div class="ongoing" (click)= "_viewDetailsComplete()"><span style="text-decoration: underline;">Ongoing</span>    <br><span style="font: normal normal bold 35px/40px Roboto;display: flex;align-items: center;justify-content: left;">{{ongoinglen}}</span></div>
+        <div class="stuck" (click)= "_viewDetailsstuck()"><span style="text-decoration: underline;">Stuck Booking</span><br><span    style="font: normal normal bold 35px/40px Roboto;display: flex;align-items: center;justify-content: center;">{{stuckbookinglen}}</span></div>
+      </div>
+      </div>
+  
+      <div class="onboarded">
+        <label class="label2" style="font-family: 'Roboto', sans-serif; font-weight:700;margin-left:5px;position: relative; top:2%;font-size: 1vw;">Total Onboarded Connectors</label>
+          <label style="font-weight: 500; margin-left: 150px; color:#000000;position: relative; top:2%;">{{totalconnectorlen}}</label>
+          <br>
+          <label class="label2" style=" font-family: 'Roboto', sans-serif; font-weight:700;margin-left:5px;position: relative; top:2%;font-size: 1vw;">Total Charging Stations</label>
+          <label style="font-weight: 500; margin-left: 180px; color:#000000;position: relative; top:2%;">{{totalonBoardchargerlen}}</label>
+          <hr style="border: 0.5px solid var(--unnamed-color-707070);border: 0.5px solid #707070;opacity:0.2;width:96%;">
+          <div class="flex">
+            <div class="flex-left">
+              <div class="donut" onclick="pressme()">
+                <div class="hole">
+                </div>
+              </div>
+              <!-- <button  style=" color: #0000FF !important;background: none; border: none;" (click)="pressme()"><u>Click to view more details</u></button>  -->
+            </div>
+            <div class = "vertical"></div>
+            <div class="flex-right">
+              <label style="color: blue;">Public         :   {{totalpublicchargerlen}}</label>
+              <label style="color: green ;">Captive      :   {{totalcaptivechargerlen}}</label>
+              <label style="color: #5C2D91;">Corporate   :   {{totalcorporatechargerlen}}</label>
+            </div>
+            <div class="flex-right">
+              <label style="color: #F8C300;">Home           :{{totalhomechargerlen}}</label>
+              <label style="color: orange;"> Bus            :        0</label>
+              <label style="color: #973F30;">Housing Society:        0</label>
+            </div>
+            
+          </div>
+          <button  style=" color: #000000 !important;background: none; border: none;margin-left: 4%;top:3.5%;position: relative;font-weight: bolder;cursor: pointer;" (click)="pressme()">View Details</button>
+      </div>
+    </div>
+    <div class="mapCount">
+      <div class="count">
+        <button style="width:3%;background: #FFFFFF 0% 0% no-repeat padding-box;
+        box-shadow: inset 0px 3px 6px #00000008;
+        border: 1px solid #E9E8E8;
+        cursor: pointer;height:100%;position:relative;top:15%;" matTooltip="Refresh" (click)="ngOnInit()"><mat-icon style="margin-left: -50%;">refresh</mat-icon></button>
+        <button class="button" style="font: normal normal medium 0.9vw Roboto;" (click)="selectedTab('all')">Total:{{totachargerlen}}</button>
+        <button class="button" style="font: normal normal medium 0.9vw Roboto;color:green" (click)="selectedTab('active')">Active:{{totaActivechargerlen}} ({{totaactivechargerlen}}%)</button>
+        <button class="button" style="font: normal normal medium 0.9vw Roboto;color:red" (click)="selectedTab('inactive')">Inactive:{{totaInactivechargerlen}} ({{totalinactivechargerlen}}%)</button>
+        <!-- <button class="button" style="font: normal normal medium 0.9vw Roboto;color:#5C2D91" (click)="selectedTab('acknowledged')">Acknowledged:{{0}}</button> -->
+        <button class="button" style="font: normal normal medium 0.9vw Roboto;color:purple" (click)="selectedTab('faulted')">Faulted:{{totalfaultchargerlen}}</button>
+        <button class="button" style="font: normal normal medium 0.9vw Roboto;color:#973F30" (click)="selectedTab('star')">Star: {{totalstarchargerlen}}</button>
+        <button class="button" style="font: normal normal medium 0.9vw Roboto;color: grey;" (click)="selectedTab('highway')">Highway:     {{highwaychargerlen}}</button>
+      </div>
+      <div class="map">
+        <!-- map -->
+        <div *ngIf="!loader" class="load">
+          <div class="loader">
+            <img src="assets/images/ez_c.png">
+            </div>
+          </div>
+        <agm-map *ngIf="loader"
+      [latitude]="lat"
+      [longitude]="lng"
+      [zoom]="zoom"
+      [disableDefaultUI]="false"
+      [zoomControl]="true"
+      [streetViewControl]="false"
+      [keyboardShortcuts]="false"
+      >    <!-- (mapClick)="mapClicked($event)" -->
+    <agm-marker
+          *ngFor="let marker of markers; let i = index"
+          (markerClick)="markerClicked(marker, i, infoWindowRef)"
+          [latitude]="marker.lat"
+          [longitude]="marker.lng"
+          [label]="marker.label"
+          [iconUrl]="marker.icon"
+          (mouseOver)="onMouseOver(infoWindowRef)" 
+          (mouseOut)="onMouseOut(infoWindowRef)"
+          (markerClick)="_chargingSession(marker.name,marker.identifier,marker.city,marker.state)"
+          >
+  
+      <agm-info-window #infoWindowRef
+      [isOpen]="isInfoWindowOpen(i)">
+          <b>Identifier : {{marker.identifier}}</b><br>
+          <b>City : {{marker.city}}</b><br>
+          <b>Name : {{marker.name}}</b>
+      </agm-info-window>
+  
+    </agm-marker>
+  
+  </agm-map>
+      </div>
+    </div>
+  </div>
+  <br>

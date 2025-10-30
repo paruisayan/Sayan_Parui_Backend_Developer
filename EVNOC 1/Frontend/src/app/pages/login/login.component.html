@@ -1,0 +1,31 @@
+<div class="main">
+    <div class="box">
+    <div class="form">
+        <div class="logo">
+        <img src="./assets/images/TATAPOWER.NS.png">
+        </div>
+        <div class="heading">
+            <h1>EV Network Operation Center</h1>
+        </div>
+        <h1>Sign In</h1>
+        <!-- <p>Provide your username and password to log into the system</p> -->
+        <form [formGroup]='form' (ngSubmit)='onLogin()'>
+        <div class="inputBox">
+            <input type="text" required formControlName='username' >
+            <span>Username</span>
+            <i></i>
+        </div>
+        <div class="inputBox">
+            <input type="password" required formControlName='password'>
+            <span>Password</span>
+            <i></i>
+        </div>
+        <div class="links">
+            <a href="#">Forgot Password</a>
+            <a href="#">Signup</a>
+        </div>
+        <input type="submit" value="Login">
+    </form>
+    </div>
+    </div>
+    </div>

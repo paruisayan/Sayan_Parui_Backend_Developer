@@ -1,0 +1,33 @@
+<div class="main">
+    <mat-toolbar class="toolbar">
+        <span style="font-size: 1.4vw;font-weight:600;">Charger Hits > Daily Hits Count</span>
+      </mat-toolbar> 
+      <div class="search">
+        <div class="date" [formGroup]="dateRange">
+        <input placeholder="Start date" formControlName="start" matInput [matDatepicker]="picker" [max]="today" (dateInput)="setDate($event)" [formControl]="dates" >
+        <mat-datepicker-toggle style="position: relative; top:25%;margin-left: -5%;" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        </div>
+    </div>
+      <div class="table" *ngIf="data; else no_data">
+        <table>
+            <thead>
+                    <th *ngFor="let i of columns">{{i}}</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of index">
+                    <td>{{identifier[i]}}</td><td>{{name[i]}}</td>
+                    <td>{{count[i]}}</td><td>{{vendor[i]}}</td>
+                    <td>{{model[i]}}</td><td>{{address[i]}}</td>
+                    <td>{{city[i]}}</td><td>{{state[i]}}</td>
+                    <td>{{type[i]}}</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+      <ng-template #no_data>
+        <div style="display: flex;align-items: center;justify-content: center;">
+          <h2>Data not available for the selected date</h2>
+        </div>
+      </ng-template>
+</div>

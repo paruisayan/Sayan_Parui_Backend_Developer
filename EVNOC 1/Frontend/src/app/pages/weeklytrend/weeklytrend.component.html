@@ -1,0 +1,19 @@
+<mat-toolbar class="toolbar" style="background-color: white;">
+    <span style="font-size: 1.4vw;font-weight:600;">Analytics > Charging Session Trends > Weekly Trend</span>
+</mat-toolbar>
+<div style="margin-left: 20%;">
+<button mat-raised-button id="MO" [style.color]="selected==0?'white':'black'" [style.background-color]="selected==0?'#1169B5':'white'" (click)="selected==0?selected=0:selected=0" [routerLinkActive]="'active'" (click)="days('MO')" >MONDAY</button>
+<button mat-raised-button id="TU" [style.color]="selected==1?'white':'black'" [style.background-color]="selected==1?'#1169B5':'white'" (click)="selected==1?selected=1:selected=1" [routerLinkActive]="'active'" (click)="days('TU')" >TUESDAY</button>
+<button mat-raised-button id="WE" [style.color]="selected==2?'white':'black'" [style.background-color]="selected==2?'#1169B5':'white'" (click)="selected==2?selected=2:selected=2" [routerLinkActive]="'active'" (click)="days('WE')" >WEDNESDAY</button>
+<button mat-raised-button id="TH" [style.color]="selected==3?'white':'black'" [style.background-color]="selected==3?'#1169B5':'white'" (click)="selected==3?selected=3:selected=3" [routerLinkActive]="'active'" (click)="days('TH')" >THURSDAY</button>
+<button mat-raised-button id="FR" [style.color]="selected==4?'white':'black'" [style.background-color]="selected==4?'#1169B5':'white'" (click)="selected==4?selected=4:selected=4" [routerLinkActive]="'active'" (click)="days('FR')" >FRIDAY</button>
+<button mat-raised-button id="SA" [style.color]="selected==5?'white':'black'" [style.background-color]="selected==5?'#1169B5':'white'" (click)="selected==5?selected=5:selected=5" [routerLinkActive]="'active'" (click)="days('SA')" >SATURDAY</button>
+<button mat-raised-button id="SU" [style.color]="selected==6?'white':'black'" [style.background-color]="selected==6?'#1169B5':'white'" (click)="selected==6?selected=6:selected=6" [routerLinkActive]="'active'" (click)="days('SU')" >SUNDAY</button>
+<br><br>
+</div>
+<div *ngIf="!loader" class="load">
+    <div class="loader">
+        <img src="assets/images/ez_c.png">
+      </div>
+</div>
+<div echarts *ngIf="loader" [options]="eChartOption" class="chart"></div>

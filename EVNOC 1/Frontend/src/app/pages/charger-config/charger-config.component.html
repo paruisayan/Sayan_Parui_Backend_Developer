@@ -1,0 +1,196 @@
+<div class="main">
+    <mat-tab-group (selectedTabChange)="onTabChanged($event)" mat-stretch-tabs="true" mat-align-tabs="start" animationDuration="0ms">
+      <mat-tab label="All Chargers" style="color:red;"> 
+        <form [formGroup]="search">
+        <input (keyup)="applyFilter($event)" name="searchbar" formControlName="searchbar" placeholder="Search" #input style="border: 1px solid #1169B5;opacity: 1;color: #1169B5;"><br><br><br>
+      </form>
+        <div class="table">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef> State </th>
+        <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef> City </th>
+        <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="identifier">
+        <th mat-header-cell *matHeaderCellDef> Identifier </th>
+        <td mat-cell *matCellDef="let element"> {{element.identifier}} </td>
+      </ng-container>
+    
+      
+    
+    <ng-container matColumnDef="checkbox">
+      <th mat-header-cell *matHeaderCellDef>
+       Select Star Chargers 
+       
+      </th>
+      <td  mat-cell *matCellDef="let element">
+        <mat-checkbox [ngModel]="element.isStar" (change)="addPriorityChargers(element.identifier,'priority')"  >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="checkbox1">
+      <th mat-header-cell *matHeaderCellDef>
+       Select Highway Chargers 
+       
+      </th>
+      <td  mat-cell *matCellDef="let element">
+        <mat-checkbox [ngModel]="element.isHighWay" (change)="addHighwayChargers(element.identifier,'highway')">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true;" style="background-color:lightblue"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+     ></tr>
+      
+    
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    
+    </table>
+  </div>
+    <button type="submit" style="background: blue;color: #ffffff; border: none; text-align: center;font-family: 'Roboto', sans-serif; font-size: 15px; font-weight: 700; margin-top: 2px;margin-left: 600px; height: 40px;width: 150px;"(click)="update()" (click)="_getChargingSessionDetails()"  > 
+      SUBMIT
+    </button>
+  </mat-tab>
+    <!-- priority charger -->
+      <mat-tab label="Star Chargers" (click)="_getPriorityChargerDetails()"> 
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input style="border: 1px solid #1169B5;opacity: 1;color: #1169B5;"><br><br><br>
+        <!-- <input matInput height="30px"  style="margin-top: 0.5%;border: 1px solid #1169B5;opacity: 1;color: #1169B5;">   -->
+        <div class="table">
+        <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
+        
+          <!-- Position Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef> State </th>
+            <td  mat-cell *matCellDef="let element"> {{element.state}} </td>
+          </ng-container>
+        
+          <!-- Weight Column -->
+          <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef> City </th>
+            <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+          </ng-container>
+        
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="identifier">
+            <th mat-header-cell *matHeaderCellDef> Identifier </th>
+            <td  mat-cell *matCellDef="let element"> {{element.identifier}} </td>
+          </ng-container>
+        
+          
+        
+        <ng-container matColumnDef="checkbox">
+          <th mat-header-cell *matHeaderCellDef>
+          Unselect Star Chargers
+           
+          </th>
+          <td  mat-cell *matCellDef="let element">
+            <mat-checkbox (change)="deletePriorityChargers(element.identifier,'priority')">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        
+        
+        
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns1; sticky:true;" style="background-color:lightblue"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns1;"
+         ></tr>
+          
+        
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>
+        
+        </table>
+      </div>
+        <button style="background: blue;color: #ffffff; border: none; text-align: center;font-family: 'Roboto', sans-serif; font-size: 15px; font-weight: 700; margin-top: 2px;margin-left: 600px; height: 40px;width: 150px;" (click)="deletechargers()" (click)="_getPriorityChargerDetails()"> 
+          SUBMIT
+        </button>
+      </mat-tab>
+        <mat-tab label="Highway Chargers" (click)="_getHighwayChargerDetails()"> 
+          <input (keyup)="applyFilter($event)" placeholder="Search" #input style="border: 1px solid #1169B5;opacity: 1;color: #1169B5;"><br><br><br>
+          <div class="table">
+          <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="state">
+              <th mat-header-cell *matHeaderCellDef> State </th>
+              <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="city">
+              <th  mat-header-cell *matHeaderCellDef> City </th>
+              <td  mat-cell *matCellDef="let element"> {{element.city}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="identifier">
+              <th mat-header-cell *matHeaderCellDef> Identifier </th>
+              <td mat-cell *matCellDef="let element"> {{element.identifier}} </td>
+            </ng-container>
+  
+          <ng-container matColumnDef="checkbox1">
+            <th mat-header-cell *matHeaderCellDef>
+             Unselect Highway Chargers
+             
+            </th>
+            <td  mat-cell *matCellDef="let element">
+              <mat-checkbox (change)="deleteHighwayChargers(element.identifier,'highway')">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+          
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns2;sticky:true;" style="background-color:lightblue"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"
+           ></tr>
+            
+          
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+           
+          </table>
+        </div>
+          <button style="background: blue;color: #ffffff; border: none; text-align: center;font-family: 'Roboto', sans-serif; font-size: 15px; font-weight: 700; margin-top: 2px;margin-left: 600px; height: 40px;width: 150px;" (click)="deletechargers()" (click)="_getHighwayChargerDetails()"> 
+            SUBMIT
+          </button>  
+      </mat-tab>
+    </mat-tab-group>
+  </div>

@@ -1,0 +1,156 @@
+
+<div class="main">
+    <div class="menu">
+        <br>
+        <span>Showing you results for</span>
+        <form [formGroup] = "createAccountForm">
+            <select style="height: 2.5vw; width: 28vw;font-size: 1vw;" formControlName = "_states" (change)="onChangeState($event)">
+              <option value="" disabled selected>Select State..</option>
+              <!-- <option value="Andhra Pradesh">Andhra Pradesh</option>
+             
+              <option value="Assam">Assam</option>
+              <option value="Bihar">Bihar</option>
+              <option value="Chhattisgarh">Chhattisgarh</option>
+              <option value="Goa">Goa</option> -->
+              <option value="Gujarat">Gujarat</option>
+              <!-- <option value="Haryana">Haryana</option>
+              <option value="Himachal Pradesh">Himachal Pradesh</option>
+              <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+              <option value="Jharkhand">Jharkhand</option>
+              
+              <option value="Kerala">Kerala</option>
+              <option value="Madhya Pradesh">Madhya Pradesh</option> -->
+              <option value="Maharashtra">Maharashtra</option>
+              <!-- <option value="West Bengal">West Bengal</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Uttarakhand">Uttarakhand</option> -->
+              <!-- <option value="Meghalaya">Meghalaya</option> -->
+              <!-- <option value="Mizoram">Mizoram</option> -->
+              <!-- <option value="Nagaland">Nagaland</option> -->
+              <!-- <option value="Odisha">Odisha</option>
+              <option value="Punjab">Punjab</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Sikkim">Sikkim</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="Telangana">Telangana</option>
+              <option value="Tripura">Tripura</option>
+              
+              <option value="Uttar Pradesh">Uttar Pradesh</option>
+              <option value="Pondicherry">Pondicherry</option>
+               <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option> -->
+              <!-- <option value="Chandigarh">Chandigarh</option> -->
+              <!-- <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option> -->
+              <!-- <option value="Daman and Diu">Daman and Diu</option> -->
+              <!--  -->
+              <!-- <option value="Lakshadweep">Lakshadweep</option> -->
+              <!-- <option value="Puducherry">Puducherry</option> -->
+            <!-- 
+          </div> -->
+        </select>
+                <select class="sel_city_pin" formControlName="cities" (change)="onChangeCity($event)">
+                  <option value="" selected>Select City..</option> 
+                  <option *ngFor="let city1 of cityList">
+                    {{city1}}</option>
+  
+                     <!-- <option *ngFor="let cityData of cityList">
+                 {{cityData}}  </option> -->
+                </select>
+                <select class="sel_city_pin" formControlName="depos" (change)="getDepoDetails($event)">
+                  <option value="" selected>Select depos..</option>
+                  <option *ngFor="let depo of depolist">{{depo}}</option>
+                </select>
+        </form>
+        <div class="update">
+          <div style="width:100%" class="active">
+          <p style="font:normal normal bold 1.1vw/1.3vw Roboto;letter-spacing: 0px;color: #27150C;">Today's Updates</p>
+          </div>
+          <div class="in_active">
+            <br>
+          <p class="inact" style="color: red;font: normal normal medium 1vw/1.2vw Roboto;top:24%">{{inactivelen}} chargers turned inactive today<button mat-button color="primary" (click)= "viewDetails()">View Details</button></p>
+          </div>
+        </div>
+        <div class="sessions">
+          <p>Total Completed Charging Sessions</p>
+          <div class="box">
+          <div class="completed">&nbsp;&nbsp; Completed<br><span style="font: normal normal bold 40px/48px Roboto;">{{completelen}}</span></div>
+          <div class="ongoing" (click)= "_viewDetailsComplete()"><span style="text-decoration: underline;">Ongoing ></span>    <br><span style="font: normal normal bold 40px/48px Roboto;">{{ongoinglen}}</span></div>
+        </div>
+        </div>
+    </div>
+    <div class="mapAndCount">
+        <div class="count">
+            <button class="button" style="font: normal normal medium 0.9vw Roboto;" >Total Connectors : {{corporatechargeronboardlen}}</button>
+            <button class="button" style="font: normal normal medium 0.9vw Roboto;color:green" >Active Connectors :{{homechargeronboardlen}}</button>
+            <button class="button" style="font: normal normal medium 0.9vw Roboto;color:orange" >Inactive Connectors :{{captivechargeronboardlen}}</button>
+            <button class="button" style="font: normal normal medium 0.9vw Roboto;" >Faulted Connectors : {{housingchargeronboardlen}}</button>
+        </div>
+        <div class="map">
+            <agm-map
+                [latitude]="23"
+                [longitude]="81"
+                [zoom]="4.4">
+                <agm-marker
+                *ngFor="let depo of _stateCharger;let i = index"
+                [latitude]="depo.latitude"
+                [longitude]="depo.longitude"
+                [radius]="50000"
+                [fillColor]="'red'"
+                (mouseOver)="onMouseOver(infoWindowRef)"
+                (mouseOut)="onMouseOut(infoWindowRef)"
+                (markerClick)="markerClicked(depo,i, infoWindowRef)"
+                >
+                <agm-info-window #infoWindowRef>
+                    <b>{{depo.locationid}}</b>
+                </agm-info-window>
+                </agm-marker>
+            </agm-map>
+        </div>
+    </div>
+</div>
+<div *ngIf="show" class="pop" ng-show="show">
+    <p><label for="3" class="open"></label></p>
+    <input type="checkbox" id="3" [(ngModel)]="show"/>
+    <div class="modal">
+      <div class="modal__inner">
+        <div style="width: 100%;background-color: blue;"><h1 style="text-align:center;color: white;">{{stationName}}</h1></div>
+          
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef >Status</th>
+              <td mat-cell *matCellDef="let i" [ngStyle]="{'background-color': i.status =='Charging'? '#F9CB25' : i.status =='Preparing'? '#FF9900' : i.status =='Inactive'? '#FF2525' : i.status =='Faulted'? 'red': i.status =='Unavailable'? 'gray' : i.status =='Finishing'? 'green' : '#9DCC17'}"> {{i.status}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="identifier">
+              <th mat-header-cell *matHeaderCellDef >Charger ID</th>
+              <td mat-cell *matCellDef="let element"> {{element.identifier}}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="connector_id">
+              <th mat-header-cell *matHeaderCellDef >Connector</th>
+              <td mat-cell *matCellDef="let element"> {{element.connector_id}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="startSoC">
+              <th mat-header-cell *matHeaderCellDef >Start Battery SoC (%)</th>
+              <td mat-cell *matCellDef="let element"> {{element.startSoC}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="CurrentSoC">
+              <th mat-header-cell *matHeaderCellDef >Current Battery SoC (%)</th>
+              <td mat-cell *matCellDef="let element"> {{element.CurrentSoC}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="remTime">
+              <th mat-header-cell *matHeaderCellDef >Remaining time for 98% SoC (mins)</th>
+              <td mat-cell *matCellDef="let element"> {{element.remTime}}</td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true" style="background-color:lightblue"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <!-- <mat-paginator #paginator [pageSizeOptions]="[2,4,6]" showFirstLastButtons></mat-paginator> -->
+        <label class="btn-close" for="3" ng-click="hideshow()">X</label>
+      </div>
+    </div>
+  </div>

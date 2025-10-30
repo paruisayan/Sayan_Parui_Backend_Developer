@@ -1,0 +1,215 @@
+<div *ngIf="region.condition==='mapiconClick'">
+    <button type="button" (click)="closeDialog()" style="color: #FF0000;cursor: pointer;position: relative;left: 93%;">X</button>
+    <h2 mat-dialog-title>Charger Details</h2>
+    <mat-dialog-content class="mat-typography">
+      <h4><label style="font-weight: bold;">Charging Station Name :         </label> {{region.datakey.identifier.station}}</h4>
+      <h4><label style="font-weight: bold;">Identifier :                    </label> {{region.datakey.identifier.identifier}} </h4>
+      <h4><label style="font-weight: bold;">City :                          </label> {{region.datakey.identifier.city}} </h4>
+      <h4><label style="font-weight: bold;">Inactive Duration :             </label> <button mat-flat-button 
+        [ngStyle]="{'background-color': region.datakey.inactive<=0 ? 'green':'red'}" color="warn">
+        {{region.datakey.inactive}} hrs</button></h4>
+      <h4><label style="font-weight: bold;">Model of Charger :              </label> {{region.datakey.model}} </h4>
+      <h4><label style="font-weight: bold;">Last Transaction :              </label> {{region.datakey.last_transaction   | date:'medium'}} </h4>
+      <h4><label style="font-weight: bold;">Telecom Partner :               </label> {{region.datakey.telecom_partner}} </h4>
+      <h4><label style="font-weight: bold;">Name of location partner :      </label> {{region.datakey.name_of_location_partener}} </h4>
+      <h4><label style="font-weight: bold;">Email of location partner :     </label> {{region.datakey.email_of_location_partner}} </h4>
+      <h4><label style="font-weight: bold;">Mobile No. of location partner :</label> {{region.datakey.mobile_no_of_location_partner}} </h4>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button color="primary" (click) = _acknowledgement(region.datakey.identifier) mat-button mat-dialog-close>Acknowledge</button>
+      <button color="primary" (click) = _alertShow(region.datakey.identifier) mat-button mat-dialog-close>View Recent Faults</button>
+    </mat-dialog-actions>
+  </div>
+  <div *ngIf="region.condition==='mapAlertClick'" mat-dialog-content>
+    <button type="button" (click)="closeDialog()" style="float: right; color: #FF0000;">X</button>
+    <mat-toolbar class="toolbar">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>monitor</mat-icon>
+      </button>
+      <span>Charger Logs</span>
+  </mat-toolbar>
+  <div class="table-responsive">
+    <table >
+      <thead>
+        <tr>
+          <th>TIME</th>
+          <th>MSG</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let element of elementArray">
+          <td>{{element.time}}</td>
+          <td>{{element.msg}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div *ngIf="region.condition==='mapAlertClick1'" mat-dialog-content>
+    <button type="button" (click)="closeDialog()" style="left:98%; color: #FF0000;position:relative;">X</button>
+    <mat-toolbar class="toolbar">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>monitor</mat-icon>
+      </button>
+      <span>Today's Inactive Charger Details</span>
+  </mat-toolbar>
+  <div class="table-responsive ">
+    <table > 
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>City</th>
+          <th >Identifier </th>
+          <th >Manufacturer</th>
+          <th >Model</th>
+          <th >Inactive_Duration</th>
+          <th >Name_of_location_partner</th>
+          <th >Email_of_location_partner</th>
+          <th >Mobile_no_of_location_partner</th>
+          <th>Telecom_partner</th>   
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let element of elementArray">
+          <td >{{element.name}}</td>
+          <td>{{element.city}} </td>
+          <td>{{element.identifier}}</td>
+          <td>{{element.make}}</td>
+          <td>{{element.model}}</td>
+          <td>{{element.inactive_duration}}</td>
+          <td>{{element.name_of_location_partener}}</td>
+          <td>{{element.email_of_location_partener}}</td>
+          <td>{{element.mobile_number_of_location_partener}}</td>
+          <td>{{element.telecom_partner}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div *ngIf="region.condition==='mapAlertClick2'" mat-dialog-content>
+    <button type="button" (click)="closeDialog()" style="left:98%; color: #FF0000;position:relative;">X</button>
+    <mat-toolbar class="toolbar">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>monitor</mat-icon>
+      </button>
+      <span>Ongoing ChargingSession Details</span>
+  </mat-toolbar>
+  <div class="table-responsive ">
+    <table >
+      <thead>
+        <tr>
+          <th >Source_Identifier</th>
+          <th >Name</th>
+          <th >City</th>
+          <th>State</th>
+          <th>Identifier</th>
+          <th>Connector_ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let element of elementArray">
+          <td>{{element.SOURCE_IDENTIFIER}}</td>
+          <td>{{element.name}}</td>
+          <td>{{element.city}} </td>
+          <td>{{element.state}}</td>
+          <td>{{element.identifier}}</td>
+          <td>{{element.CONNECTOR_ID}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div *ngIf="region.condition==='mapAlertClick5'">
+    <button type="button" (click)="closeDialog()" style="float: right; color: #FF0000;">X</button>
+    <mat-toolbar class="toolbar">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>monitor</mat-icon>
+      </button>
+      <span>Chargerwise Count</span>
+  </mat-toolbar>
+  <div class="table-responsive ">
+    <table >
+        <div class="table">
+            <div style="font-size: 17px; color:#000000; font-family: 'Roboto', sans-serif; font-weight:700;text-align: center;">Charger Type</div>
+            <div style="font-size: 17px; color:#000000; font-family: 'Roboto', sans-serif; font-weight:700;text-align: center;">Installed Points</div>
+            <div style="font-size: 17px; color:#000000; font-family: 'Roboto', sans-serif; font-weight:700;text-align: center;">Actual Onboarded Points</div> 
+            <div  style="font-size: 15px; color:#3A7DDA; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">Public</div>
+            <div  style="font-size: 15px; color:#3A7DDA; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">{{publicchargerinstalledlen}}</div>
+            <div  style="font-size: 15px; color:#3A7DDA; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">{{publicchargeronboardlen}}</div>
+            <div style=" font-size: 15px; color:#009900; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">Captive</div>
+            <div style=" font-size: 15px; color:#009900; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">{{captivechargerinstalledlen}}</div>
+            <div style=" font-size: 15px; color:#009900; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">{{captivechargeronboardlen}}</div>
+            <div  style=" font-size: 15px; color:#5C2D91; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">Corporate</div>
+            <div  style=" font-size: 15px; color:#5C2D91; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">{{corporatechargerinstalledlen}}</div>
+            <div  style=" font-size: 15px; color:#5C2D91; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">{{corporatechargeronboardlen}}</div>
+            <div  style="font-size: 15px; color:#973F30; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">Housing Society</div>
+            <div  style=" font-size: 15px; color:#973F30; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">{{hosingchargerinstalledlen}}</div>
+            <div style=" font-size: 15px; color:#973F30; font-family: 'Roboto', sans-serif; font-weight:500; text-align: center;">{{housingchargeronboardlen}}</div>
+            <div  style=" font-size: 15px; color:#FF9900; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">Bus</div>
+            <div style=" font-size: 15px; color:#FF9900; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">{{buschargerinstalledlen}}</div>
+            <div style=" font-size: 15px; color:#FF9900; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">{{buschargeronboardlen}}</div>
+            <div  style=" font-size: 15px; color:#F8C300; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">Home</div>
+            <div  style=" font-size: 15px; color:#F8C300; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">{{homechargerinstalledlen}}</div>
+            <div  style=" font-size: 15px; color:#F8C300; font-family: 'Roboto', sans-serif; font-weight:500;text-align: center;">{{homechargeronboardlen}}</div>
+           </div>
+        </table>
+      </div>
+      </div>
+      <div *ngIf="region.condition==='mapAlertClick3'" mat-dialog-content>
+        <button type="button" (click)="closeDialog()" style="left:88%;top:14%; color: #FF0000;position: fixed;">X</button>
+        <mat-toolbar class="toolbar">
+          <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>monitor</mat-icon>
+          </button>
+          <span>Stuck Booking Details</span>
+      </mat-toolbar>
+      <div class="table-responsive">
+        <table >
+          <thead>
+            <tr>
+              <th >EVSE_ID</th>
+              <th > Connector_ID</th>
+              <th >Source_Identifier </th>
+              <th >Request_Start_Date</th>
+              <th > Request_End_Date</th>
+              <th > Usage_Status</th>
+              <th > CDM_Session_ID</th>
+              <th >Units_Consumed</th>
+              <th >Actions</th>
+              <th >Logs</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let element of elementArray">
+              <td >{{element.EVSE_ID}}</td>
+              <td>{{element.CONNECTOR_ID}} </td>
+              <td>{{element.SOURCE_IDENTIFIER}}</td>
+              <td>{{element.REQ_START_DATE}}</td>
+              <td>{{element.REQ_END_DATE}}</td>
+              <td>{{element.USAGE_STATUS}}</td>
+              <td>{{element.CDM_SESSION_ID}}</td>
+              <td>{{element.UNITS}}</td>
+              <td>
+                <button  style="color: #FF0000 !important;" (click)="stuckAction(element.BOOKING_ID,element.EVSE_ID,element.CONNECTOR_ID)"><u>Clear</u></button>
+              </td>
+              <td>
+                <button  style="color: #0000FF !important;"  (click)="getlogs(element.EVSE_ID)"><u>View</u></button>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <div *ngIf="region.condition==='mapiconStuck'">
+        <h2 mat-dialog-title>Charger Details</h2>
+        <mat-dialog-content class="mat-typography">
+          <h3>Charging Station Name : {{region.datakey.name}}</h3>
+          <h3>Identifier : {{region.datakey.identifier}} </h3>
+          <h3>Usage Status : {{region.datakey.USAGE_STATUS}} </h3>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+          <button color="primary" (click) = clearstuckbooking(region.datakey.identifier) mat-button mat-dialog-close>Clear</button>
+          <button color="primary" (click) = viewStucklogs(region.datakey.identifier) mat-button mat-dialog-close>logs</button>
+          <button mat-button mat-dialog-close>Close</button>
+        </mat-dialog-actions>
+      </div>

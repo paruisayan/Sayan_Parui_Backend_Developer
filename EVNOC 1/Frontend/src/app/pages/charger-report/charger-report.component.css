@@ -1,0 +1,21 @@
+.example-container {
+    height: 75.5%;
+    width: 100vw;
+    max-width: 150%;
+    overflow: auto;
+  }
+  
+  table {
+    width: 150%;
+  }
+th{
+    font-size: 1.2vw;
+    color: black;
+    background-color: azure;
+}
+td{
+    text-align: center;
+}
+.mat-column-avg{
+    border-right: 1px solid rgba(0,0,0,.12);
+}

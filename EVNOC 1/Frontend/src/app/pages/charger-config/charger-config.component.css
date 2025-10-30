@@ -1,0 +1,62 @@
+.main{
+    width: 98vw;
+    height: 50vh;
+    margin-left: 1%;
+  }
+  table {
+      margin-left: 8px;
+      width: 98%;
+      margin-top:0%;
+  }
+    .table{
+      height: 65vh;
+      margin-top: -2.8%;
+      width: 98vw;
+      overflow: scroll;
+      overflow-x: hidden;
+    }
+  th{
+      font-weight: bold;
+      font-size: 1.2vw;
+  }
+  td{
+      font-size: 1vw;
+  }
+    input{
+      border: 1px solid #1169B5;
+        opacity: 1;
+        color: #1169B5;
+        height: 30px;
+        width:30%;
+        position: relative;
+        margin-top: 0.4%;
+        margin-left: 1%;
+    }
+      .mat-column-name{
+        border-right: 1px solid rgba(0,0,0,.12);;
+    }
+    .mat-column-state{
+      border-right: 1px solid rgba(0,0,0,.12);;
+      text-align: center;
+  }
+  .mat-column-city{
+    border-right: 1px solid rgba(0,0,0,.12);;
+    text-align: center;
+  }
+  .mat-column-checkbox{
+    border-right: 1px solid rgba(0,0,0,.12);;
+    text-align: center;
+  }
+  .mat-column-checkbox1{
+      border-right: 1px solid rgba(0,0,0,.12);;
+      text-align: center;
+    }
+  .mat-mdc-row:hover .mat-mdc-cell {
+    background-color: rgb(211, 211, 211);
+  }
+  
+  .mat-column-identifier{
+    border-right: 1px solid rgba(0,0,0,.12);;
+    text-align: center;
+  }
+  

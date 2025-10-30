@@ -1,0 +1,53 @@
+<div class="main">
+<div class="header">
+    <div class="logo"><img src="assets/images/tata_power_logo.png"></div>
+    <div class="title"><span>EV Network Operation Center</span></div>
+    <span class="spacer"></span>
+    <button mat-button style="color: white;">{{time | date: 'hh:mm:ss a'}}&nbsp;&nbsp;{{date | date: 'dd-MMM-YYYY'}}</button>
+</div>
+<div class="navbar">
+    <ul>
+        <li
+            [routerLinkActive]="'active'" routerLink="/dashboard" [routerLinkActiveOptions]="{exact:true}">Dashboard
+        </li>
+        <li
+             [routerLinkActive]="'active'" routerLink="/alarmFault">Alarms & Fault
+        </li>
+        <!-- <li
+             [routerLinkActive]="'active'" routerLink="/chargerReset">Remote Operation
+        </li> -->
+        <li
+             [routerLinkActive]="'active'" routerLink="/configuration">Charger Configuration
+        </li>
+        <!-- <li
+             [routerLinkActive]="'active'" routerLink="/busCharger">Bus Charger
+        </li> -->
+        <li  mat-button [matMenuTriggerFor]="menu"
+             [routerLinkActive]="'active'">Analytics
+             <mat-menu #menu="matMenu">
+               <button mat-menu-item routerLink="/network_issue">Network Issue</button>
+               <button mat-menu-item routerLink="/power_failure">Power Failure</button>
+               <button mat-menu-item routerLink="/zero_transaction">Zero Unit Transaction</button>
+               <button mat-menu-item  [matMenuTriggerFor]="submenu">Changing Session Trends</button>
+             </mat-menu>
+             <mat-menu #submenu="matMenu">
+                 <button mat-menu-item routerLink="/charging-trend">Daily Trend</button>
+                 <button mat-menu-item routerLink="/weeklyTrend">Weekly Trend</button>
+             </mat-menu>
+        </li>
+        <li mat-button [matMenuTriggerFor]="menu1"
+          [routerLinkActive]="'active'">Charger Hits
+          <mat-menu #menu1="matMenu">
+              <button mat-menu-item routerLink="/chargertraffic">Daily Hits Count</button>
+              <button mat-menu-item routerLink="/report">Last 15 Days Report</button>
+          </mat-menu>
+        </li>
+        <hr>
+        <span class="spacer"></span>
+        <li>
+            <button id="signout" (click)="OnLoggedoff()">Sign Out</button>
+        </li>
+    </ul>
+  </div>
+</div>
+  

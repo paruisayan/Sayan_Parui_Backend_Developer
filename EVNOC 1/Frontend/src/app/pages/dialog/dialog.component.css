@@ -1,0 +1,32 @@
+.table-responsive{
+    height: auto;
+    width: auto;
+  }
+  table {
+    margin-left: 8px;
+    margin-top: 5px;
+    border-collapse: collapse;
+  }
+  td{
+      text-align: center;
+    }
+  .toolbar{
+      width:auto;
+  }
+  .table-responsive td,th{
+      border:1px solid black;
+  }
+  .table-responsive tr:nth-child(even){background-color: #f2f2f2;}
+  
+  .table-responsive tr:hover {background-color: #ddd;}
+  
+  .table-responsive th {
+    text-align:center;
+    background-color: #1169B5;
+    color: white;
+    font-size: 1.2vw;
+  }
+  .table-responsive thead th {
+      position: sticky;
+      top: 0;
+    }

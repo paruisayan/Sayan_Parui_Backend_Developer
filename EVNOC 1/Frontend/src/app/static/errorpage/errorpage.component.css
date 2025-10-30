@@ -1,0 +1,23 @@
+.main{
+    width: 100vw;
+    height: 85vh;
+}
+.text{
+    height: 30vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.image{
+    height: 55vh;
+    width: 100%;
+    display: flex;
+    align-items:start;
+    justify-content: center;
+}
+.img{
+    height: 50vh;
+    width: 40vw;
+}
